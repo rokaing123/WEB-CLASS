@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>시간표</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Noto+Sans+KR:wght@100..900&display=swap');
+
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: #f4f6f8;
+    text-align: center;
+    margin: 0;
+}
+
+/* 제목 */
+h1 {
+    font-family: 'Nanum Pen Script', cursive;
+    font-size: 42px;
+    margin: 20px 0;
+}
+
+/* 필터 */
+.filter-box {
+    margin-bottom: 20px;
+}
+
+select {
+    padding: 10px;
+    border: 2px solid #5c7cfa;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+/* 테이블 */
+.table-wrapper {
+    width: 90%;
+    margin: 0 auto 40px;
+    background: white;
+    border-radius: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+th {
+    background: #5c7cfa;
+    color: white;
+}
+
+td {
+    height: 70px;
+}
+
+/* hover */
+td:hover {
+    background: #e7f5ff;
+}
+
+/* 클릭 선택 */
+.selected {
+    background: #222 !important;
+    color: white !important;
+}
+
+/* 필터 강조 */
+.highlight {
+    background: #ffd43b !important;
+    color: #000 !important;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>📚 성일정보고 시간표</h1>
+
+<div class="filter-box">
+    <select onchange="filterSubject(this.value)">
+        <option value="">전체 보기</option>
+        <option>국어</option>
+        <option>수학</option>
+        <option>영어</option>
+        <option>과학</option>
+        <option>사회</option>
+        <option>체육</option>
+        <option>미술</option>
+        <option>자율</option>
+    </select>
+</div>
+
+<div class="table-wrapper">
+<table id="timetable">
+<tr>
+    <th>교시</th>
+    <th>월</th>
+    <th>화</th>
+    <th>수</th>
+    <th>목</th>
+    <th>금</th>
+</tr>
+
+<tr>
+    <td>1교시</td>
+    <td onclick="selectCell(this)">국어</td>
+    <td onclick="selectCell(this)">수학</td>
+    <td onclick="selectCell(this)">영어</td>
+    <td onclick="selectCell(this)">과학</td>
+    <td onclick="selectCell(this)">사회</td>
+</tr>
+
+<tr>
+    <td>2교시</td>
+    <td onclick="selectCell(this)">수학</td>
+    <td onclick="selectCell(this)">영어</td>
+    <td onclick="selectCell(this)">국어</td>
+    <td onclick="selectCell(this)">체육</td>
+    <td onclick="selectCell(this)">과학</td>
+</tr>
+
+<tr>
+    <td>3교시</td>
+    <td onclick="selectCell(this)">영어</td>
+    <td onclick="selectCell(this)">과학</td>
+    <td onclick="selectCell(this)">수학</td>
+    <td onclick="selectCell(this)">국어</td>
+    <td onclick="selectCell(this)">미술</td>
+</tr>
+
+<tr>
+    <td>4교시</td>
+    <td onclick="selectCell(this)">과학</td>
+    <td onclick="selectCell(this)">사회</td>
+    <td onclick="selectCell(this)">체육</td>
+    <td onclick="selectCell(this)">영어</td>
+    <td onclick="selectCell(this)">수학</td>
+</tr>
+
+<tr>
+    <td>5교시</td>
+    <td onclick="selectCell(this)">사회</td>
+    <td onclick="selectCell(this)">국어</td>
+    <td onclick="selectCell(this)">미술</td>
+    <td onclick="selectCell(this)">수학</td>
+    <td onclick="selectCell(this)">영어</td>
+</tr>
+
+<tr>
+    <td>6교시</td>
+    <td onclick="selectCell(this)">체육</td>
+    <td onclick="selectCell(this)">미술</td>
+    <td onclick="selectCell(this)">사회</td>
+    <td onclick="selectCell(this)">국어</td>
+    <td onclick="selectCell(this)">자율</td>
+</tr>
+
+<tr>
+    <td>7교시</td>
+    <td onclick="selectCell(this)">자율</td>
+    <td></td>
+    <td></td>
+    <td onclick="selectCell(this)">사회</td>
+    <td></td>
+</tr>
+
+</table>
+</div>
+
+<script>
+// 클릭 선택
+function selectCell(cell) {
+    cell.classList.toggle("selected");
+}
+
+// 필터 기능
+function filterSubject(subject) {
+    let cells = document.querySelectorAll("#timetable td");
+
+    cells.forEach(cell => {
+        cell.classList.remove("highlight");
+
+        if (subject === "") return;
+
+        if (cell.textContent === subject) {
+            cell.classList.add("highlight");
+        }
+    });
+}
+</script>
+
+</body>
+</html>
